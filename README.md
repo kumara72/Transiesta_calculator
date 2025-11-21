@@ -3,7 +3,7 @@
 Overview:
 This repository automates the complex and often tedious workflow of Quantum Transport Calculations using Siesta and TranSIESTA (NEGF + DFT). 
 
-It was designed specifically to address the stability issues often encountered in 1D/2D/3D systems in transport calculations (e.g., Density Matrix divergence or "explosions"). It handles the entire pipeline—from initial convergence testing to the final I-V characteristics—with zero manual file copying. 
+It was designed specifically to address the stability issues often encountered in 1D/2D/3D systems in transport calculations (e.g., Density Matrix divergence or "explosions"). It handles the entire pipeline from initial convergence testing to the final I-V characteristics—with zero manual file copying. 
 
 The Problem:
 1.  Divergence: Transport calculations often fail with `dDmax` values exploding (e.g., > 40.0) instead of converging.
