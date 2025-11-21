@@ -66,4 +66,9 @@ Fixed Transverse K-points (kx​ ,ky): 1 and 1
 
 Voltage List: 0.01 0.05
 
+Credits:
+Core Methods:  Siesta & TranSIESTA: Soler et al. (2002), Brandbyge et al. (2002).
 
+TBtrans & sisl: Papior et al. (2017).
+
+Development Support: Gemini (Google): For assistance with error handling and debugging.
