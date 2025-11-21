@@ -1,0 +1,51 @@
+# (2 Au Atoms)
+
+
+SystemName          electrode
+SystemLabel         electrodel
+
+SolutionMethod      diagon      
+TS.HS.Save          .true.     
+
+XC.functional       LDA
+XC.authors          PZ
+MeshCutoff          300. Ry
+ElectronicTemperature  500 K
+OccupationFunction  FD
+
+PAO.BasisType         split
+PAO.BasisSize         DZP
+PAO.SplitNorm         0.15
+PAO.EnergyShift       275 meV
+
+MinSCFIterations       3
+MaxSCFIterations       500
+SCF.Mixer.Weight       0.05
+SCF.Mixer.History      12
+SCF.DM.Tolerance       0.0001
+DM.UseSaveDM           .false.  # Start fresh
+
+%block kgrid_Monkhorst_Pack
+  1   0   0   0.0
+   0  1   0   0.0
+   0   0 50  0.0  
+%endblock kgrid_Monkhorst_Pack
+
+LatticeConstant 1.0 Ang
+%block LatticeVectors
+ 3.00000000 0.00000000 0.00000000
+ 0.00000000 3.00000000 0.00000000
+0.00000000 0.00000000 5.80000000 # Z-vector
+%endblock LatticeVectors
+
+NumberOfAtoms 2
+AtomicCoordinatesFormat Ang
+%block AtomicCoordinatesAndAtomicSpecies
+ 1.50000000 1.50000000 1.45000000 1 # 1: Au
+ 1.50000000 1.50000000 4.35000000 1 # 2: Au
+%endblock AtomicCoordinatesAndAtomicSpecies
+
+NumberOfSpecies 1
+%block ChemicalSpeciesLabel
+ 1 79 Au
+%endblock ChemicalSpeciesLabel
