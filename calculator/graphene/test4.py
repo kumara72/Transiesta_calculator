@@ -8,7 +8,7 @@ import re
 from textwrap import dedent
 from string import Template
 
-# --- Import External Libraries safely ---
+# libraries
 try:
     import matplotlib
     matplotlib.use('Agg') 
@@ -18,7 +18,7 @@ except ImportError:
     print("Error: Matplotlib and Numpy are required.")
     sys.exit(1)
 
-# --- PLOTTING SCRIPT TEMPLATE ---
+# PLOT SCRIPT
 PLOT_SCRIPT_CONTENT = """
 import sisl
 import matplotlib.pyplot as plt
@@ -76,7 +76,7 @@ def create_plot_script(directory):
     path = os.path.join(directory, "plot_transmission.py")
     with open(path, "w") as f: f.write(PLOT_SCRIPT_CONTENT)
 
-# --- HELPER FUNCTIONS ---
+# HELPER
 def clean_file_remove_kgrid(input_path, output_path):
     try:
         with open(input_path, 'r') as f_in: lines = f_in.readlines()
@@ -130,7 +130,7 @@ def create_transiesta_run_file(device_geom_path, output_path):
     except Exception as e:
         print(f"Error copying device file: {e}"); sys.exit(1)
 
-# --- TEMPLATES ---
+# TEMPLATE
 
 # 1. MESH
 MESH_SCRIPT_TEMPLATE = Template("""
@@ -579,7 +579,7 @@ print_step "SCRIPT COMPLETE"
 echo "All scattering calculations finished successfully."
 """)
 
-# --- Helper Functions ---
+# HELPER
 
 def ask_question(prompt, default=None):
     val = input(f"{prompt} [{default}]: ").strip()
@@ -655,7 +655,7 @@ def copy_psf_files(src, dest):
             if i.endswith(".psf"): shutil.copy(os.path.join(src, i), dest)
     except: pass
 
-# --- CORE FUNCTION ---
+# CORE
 def run_convergence_stage(stage_dir, base_fdf_path, siesta_command, plot_title, k_z_val, system_label, conv_threshold, base_dir,
                           mesh_sequence, kpoint_sequence, lattice_sequence,
                           k_dim, k_fixed_x, k_fixed_y, tbtrans_command,
@@ -858,7 +858,7 @@ def main():
     elif os.path.exists(os.path.join(opt_dir, "device.DM")):
         shutil.copy(os.path.join(opt_dir, "device.DM"), os.path.join(sweep_dir, "siesta.DM"))
 
-    # --- USE OPTIMIZED FDF ---
+    # USE OPTIMIZED FDF AND TSHS
     opt_fdf_src = os.path.join(dev_res['optimize_dir'], "siesta.fdf")
     opt_fdf_dst = os.path.join(sweep_dir, "device_optimized.fdf")
     
@@ -869,7 +869,7 @@ def main():
         print("!!! WARNING: Optimized FDF not found, reverting to raw input. !!!")
         clean_file_remove_kgrid(dev_run_fdf, opt_fdf_dst)
 
-    # --- Pass Converged Values to Bash Script ---
+    # Pass Converged Values to Bash Script
     v_script = os.path.join(sweep_dir, "run_sweep.sh")
     with open(v_script, 'w') as f: f.write(dedent(VOLTAGE_SWEEP_SCRIPT_TEMPLATE.substitute(
         mpi_procs=mpi_procs, 
